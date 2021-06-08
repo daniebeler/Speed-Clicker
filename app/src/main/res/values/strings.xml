@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Speed Clicker</string>
+
+    <string name="ArrowUp" translatable="false">▲</string>
+
+    <string name="TimeSeconds">Time: %1$.2f Seconds</string>
+
+    <string name="ClickMe">CLICK ME!!!</string>
+    <string name="PressStart">Start when you are ready</string>
+    <string name="Settings">SETTINGS</string>
+    <string name="Music">MUSIC</string>
+    <string name="More">MORE&#8230;</string>
+
+    <string name="daniebeler" translatable="false">by Daniel Hiebeler</string>
+
+</resources>

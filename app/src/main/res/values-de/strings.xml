@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Speed Clicker</string>
+    <string name="Settings">Einstellungen</string>
+    <string name="ClickMe">Klick mich!!!</string>
+    <string name="PressStart">Starte wenn du bereit bist</string>
+    <string name="More">Mehr&#8230;</string>
+    <string name="Music">Musik</string>
+    <string name="TimeSeconds">Zeit: %1$.2f Sekunden</string>
+</resources>
