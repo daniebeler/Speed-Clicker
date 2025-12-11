@@ -7,9 +7,6 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.widget.TextView;
-import com.google.android.gms.ads.MobileAds;
-import com.google.android.gms.ads.initialization.InitializationStatus;
-import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class FirstActivity extends AppCompatActivity {
@@ -30,12 +27,6 @@ public class FirstActivity extends AppCompatActivity {
         colorAnim.setEvaluator(new ArgbEvaluator());
         colorAnim.setDuration(1000);
         colorAnim.start();
-
-        MobileAds.initialize(this, new OnInitializationCompleteListener() {
-            @Override
-            public void onInitializationComplete(InitializationStatus initializationStatus) {
-            }
-        });
     }
 
     @Override
@@ -44,22 +35,17 @@ public class FirstActivity extends AppCompatActivity {
 
         bInBackground = false;
 
-        new Handler().postDelayed(new Runnable() {
-            public void run() {
-                ObjectAnimator colorAnim = ObjectAnimator.ofInt(tvDaniebeler, "textColor",
-                        Color.WHITE, Color.TRANSPARENT);
-                colorAnim.setEvaluator(new ArgbEvaluator());
-                colorAnim.setDuration(1000);
-                colorAnim.start();
-            }
+        new Handler().postDelayed(() -> {
+            ObjectAnimator colorAnim = ObjectAnimator.ofInt(tvDaniebeler, "textColor",
+                    Color.WHITE, Color.TRANSPARENT);
+            colorAnim.setEvaluator(new ArgbEvaluator());
+            colorAnim.setDuration(1000);
+            colorAnim.start();
         }, 1500);
 
-        new Handler().postDelayed(new Runnable() {
-            public void run() {
-                if (!bInBackground) {
-                    startActivity(new Intent(FirstActivity.this, GameActivity.class));
-                    //overridePendingTransition(R.anim.anim_slide_in_top, R.anim.anim_slide_out_bottom);
-                }
+        new Handler().postDelayed(() -> {
+            if (!bInBackground) {
+                startActivity(new Intent(FirstActivity.this, GameActivity.class));
             }
         }, 2500);
     }
@@ -68,9 +54,5 @@ public class FirstActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         bInBackground = true;
-    }
-
-    @Override
-    public void onBackPressed() {
     }
 }

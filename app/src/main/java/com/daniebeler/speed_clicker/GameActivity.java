@@ -17,9 +17,6 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
-
 public class GameActivity extends AppCompatActivity {
 
     TextView tvCounter;
@@ -77,11 +74,6 @@ public class GameActivity extends AppCompatActivity {
         else{
             tvHighscore.setTextColor(Color.TRANSPARENT);
         }
-
-        AdView adView = findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        adView.loadAd(adRequest);
-
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -191,9 +183,5 @@ public class GameActivity extends AppCompatActivity {
                 }
             }
         }.start();
-    }
-
-    @Override
-    public void onBackPressed() {
     }
 }
