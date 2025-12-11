@@ -1,0 +1,25 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        classpath("com.android.tools.build:gradle:8.13.1")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.8.22")
+        // Application dependencies go in module-level build.gradle.kts files
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+
+// Clean task
+tasks.register<Delete>("clean") {
+    delete(rootProject.buildDir)
+}

@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.view.MotionEvent;
-import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.TextView;
@@ -81,33 +80,23 @@ public class GameActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        //SoundService.StartMusic(0);
         if (bLeftGame){
             startActivity(new Intent(GameActivity.this, GameActivity.class));
         }
 
-        btnClicker.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                if ((motionEvent.getAction() & MotionEvent.ACTION_MASK) == MotionEvent.ACTION_DOWN) {
-                    if(KontrollInt == 2){
-                        //SoundService.ClickSound();
-                        iScore++;
-                        tvCounter.setText(String.valueOf(iScore));
-                        tvCounter.startAnimation(AnimationUtils.loadAnimation(GameActivity.this, R.anim.anim_shake));
-                    }
-                    else if (KontrollInt == 1 && !bTimeIsRunning) {
-                        startonefingerClick();
-                    }
+        btnClicker.setOnTouchListener((view, motionEvent) -> {
+            if ((motionEvent.getAction() & MotionEvent.ACTION_MASK) == MotionEvent.ACTION_DOWN) {
+                if(KontrollInt == 2){
+                    iScore++;
+                    tvCounter.setText(String.valueOf(iScore));
+                    tvCounter.startAnimation(AnimationUtils.loadAnimation(GameActivity.this, R.anim.anim_shake));
                 }
-                return false;
+                else if (KontrollInt == 1 && !bTimeIsRunning) {
+                    startonefingerClick();
+                }
             }
+            return false;
         });
-    }
-    @Override
-    protected void onPause() {
-        super.onPause();
-        //SoundService.PauseMusic();
     }
 
     private void startonefingerClick() {
@@ -115,7 +104,6 @@ public class GameActivity extends AppCompatActivity {
         KontrollInt = 2;
         iScore = 0;
 
-        //SoundService.ClickSound();
         iScore++;
         tvCounter.setText(String.valueOf(iScore));
         tvCounter.startAnimation(AnimationUtils.loadAnimation(GameActivity.this, R.anim.anim_shake));
@@ -149,7 +137,7 @@ public class GameActivity extends AppCompatActivity {
                         shHighscore.edit().putInt("highscore", iScore).apply();
                     }
 
-                    tvHighscore.setText("Highscore: " + String.valueOf(shHighscore.getInt("highscore", 0)));
+                    tvHighscore.setText("Highscore: " + shHighscore.getInt("highscore", 0));
                     ObjectAnimator colorAnim = ObjectAnimator.ofInt(tvHighscore, "textColor",
                             Color.TRANSPARENT, Color.WHITE);
                     colorAnim.setEvaluator(new ArgbEvaluator());
@@ -162,23 +150,21 @@ public class GameActivity extends AppCompatActivity {
                     colorAnim3.setDuration(500);
                     colorAnim3.start();
 
-                    new Handler().postDelayed(new Runnable() {
-                        public void run() {
-                            bTimeIsRunning = false;
+                    new Handler().postDelayed(() -> {
+                        bTimeIsRunning = false;
 
-                            ObjectAnimator colorAnim2 = ObjectAnimator.ofInt(tvStart, "textColor",
-                                    Color.TRANSPARENT, Color.WHITE);
-                            colorAnim2.setEvaluator(new ArgbEvaluator());
-                            colorAnim2.setDuration(500);
-                            colorAnim2.start();
+                        ObjectAnimator colorAnim4 = ObjectAnimator.ofInt(tvStart, "textColor",
+                                Color.TRANSPARENT, Color.WHITE);
+                        colorAnim4.setEvaluator(new ArgbEvaluator());
+                        colorAnim4.setDuration(500);
+                        colorAnim4.start();
 
-                            tvTime.setText("10");
-                            ObjectAnimator colorAnim1 = ObjectAnimator.ofInt(tvTime, "textColor",
-                                    Color.TRANSPARENT, Color.WHITE);
-                            colorAnim1.setEvaluator(new ArgbEvaluator());
-                            colorAnim1.setDuration(500);
-                            colorAnim1.start();
-                        }
+                        tvTime.setText("10");
+                        ObjectAnimator colorAnim1 = ObjectAnimator.ofInt(tvTime, "textColor",
+                                Color.TRANSPARENT, Color.WHITE);
+                        colorAnim1.setEvaluator(new ArgbEvaluator());
+                        colorAnim1.setDuration(500);
+                        colorAnim1.start();
                     }, 2500);
                 }
             }
